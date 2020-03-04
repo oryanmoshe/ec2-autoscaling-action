@@ -1,5 +1,5 @@
 {
-  "name": "ecs-wait-action",
+  "name": "ec2-autoscaling-action",
   "version": "1.0.0",
   "main": "src/index.js",
   "author": "oryan@moshe.ai",

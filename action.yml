@@ -1,16 +1,18 @@
-name: 'ECS Wait'
+name: 'EC2 Autoscaling'
 author: 'Oryan Moshe'
-description: 'Waits for ECS service stability'
+description: 'Handles manual autoscaling of AWS EC2 machines'
 inputs:
-  ecs-cluster:
-    description: 'The ECS cluster name (string)'
+  scaling-group:
+    description: 'The EC2 scaling group name (string)'
     required: true
-  ecs-services:
-    description: 'List of ECS services to wait for (string[])'
-    required: true
-  retries:
-    description: 'How many times to retry the 10 minute wait (integer)'
-    default: 2
+  absolute-desired:
+    description: 'Exact number for the desired capacity (number)'
+  relative-desired:
+    description: 'Set the desired capacity relative to the current one (number)'
+  minimum-desired:
+    description: 'The minimum desired capacity (number)'
+  maximum-desired:
+    description: 'The maximum desired capacity (number)'
   aws-access-key-id:
     description: 'The AWS_ACCESS_KEY_ID (string)'
   aws-secret-access-key:
@@ -21,11 +23,13 @@ inputs:
     description: 'Whether to print the retry log (bool)'
     default: false
 outputs:
-  retries:
-    description: 'How many retries happened until success (integer)'
+  previous-desired-capacity:
+    description: 'Desired capacity before the action'
+  new-desired-capacity:
+    description: 'Desired capacity after the action'
 runs:
   using: 'node12'
   main: 'dist/index.js'
 branding:
-  icon: 'clock'
+  icon: 'chevrons-up'
   color: 'purple'

@@ -1,19 +1,33 @@
-# AWS ECS `servicesStable` waiter (with retries)
+# AWS EC2 autoscaling manager
 
-AWS provides a way to wait for certain ECS services to become `stable`, but this command times out after 10 minutes.\
-This action allows you to wait for services to become stable **and** retry the waiting process as many times as you want.
+This action allows you to autoscaling an EC2 autoscaling group by either providing an absolute number for the desired capacity, or a relative fraction.
 
 ## Inputs
 
-### `ecs-cluster`
+### `scaling-group`
 
 **Required** - _string_\
-The ECS cluster that contains your services.
+The EC2 scaling group name.
 
-### `ecs-services`
+### `absolute-desired`
 
-**Required** - _string[]_\
-A list of ECS services to make sure are stable.
+_Optional_ - _number_\
+The new desired capacity of the autoscaling group.
+
+### `relative-desired`
+
+_Optional_ - _number_\
+A number describing the relative growth (or shrinkage) of the desired capacity in the autoscaling group.
+
+### `minimum-desired`
+
+_Optional_ - _number_\
+A number describing the minimum possible desired capacity.
+
+### `maximum-desired`
+
+_Optional_ - _number_\
+A number describing the maximum possible desired capacity.
 
 ### `retries`
 
